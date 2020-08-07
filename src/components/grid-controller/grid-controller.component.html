@@ -1,0 +1,19 @@
+<h2>Grid</h2>
+<div class="group-box">
+  <div class="option-box">
+    <label>width:</label>
+    <input type="text" placeholder="auto" (ngModelChange)="onChangeWidth($event)" [(ngModel)]="width">
+  </div>
+  <div class="option-box">
+    <label>height:</label>
+    <input type="text" placeholder="auto" (ngModelChange)="onChangeHeight($event)" [(ngModel)]="height">
+  </div>
+  <div class="option-box">
+    <label>containLabel</label>
+    <input type="checkbox" (ngModelChange)="onChangeContainLabel($event)" [(ngModel)]="containLabel">
+  </div>
+  <div class="option-box">
+    <label>그리드 보기</label>
+    <input type="checkbox" (ngModelChange)="onChangeShowGrid($event)" [(ngModel)]="show">
+  </div>
+</div>

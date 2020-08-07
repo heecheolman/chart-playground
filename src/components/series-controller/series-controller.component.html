@@ -1,0 +1,40 @@
+<h2>Series</h2>
+<div class="group-box">
+  <h3>옵션</h3>
+  <div class="option-box">
+    <label>Type</label>
+    <div>
+      bar: <input type="radio" name="seriesType" value="bar" (ngModelChange)="onChangeSeriesType($event)" [(ngModel)]="type">
+      line: <input type="radio" name="seriesType" value="line" (ngModelChange)="onChangeSeriesType($event)" [(ngModel)]="type">
+    </div>
+  </div>
+  <div class="option-box">
+    <label>Stack 차트</label>
+    <input type="checkbox" (ngModelChange)="onChangeSeriesStack($event)" [(ngModel)]="stack">
+  </div>
+
+  <ng-container [ngSwitch]="type">
+    <ng-container *ngSwitchCase="'bar'">
+      <div class="option-box">
+        <label>Bar Width</label>
+        <input type="text" (ngModelChange)="onChangeBarWidth($event)" [(ngModel)]="barWidth">
+      </div>
+      <div class="option-box">
+        <label>Bar Min Width</label>
+        <input type="text" (ngModelChange)="onChangeBarMinWidth($event)" [(ngModel)]="barMinWidth">
+      </div>
+      <div class="option-box">
+        <label>Bar Max Width</label>
+        <input type="text" (ngModelChange)="onChangeBarMaxWidth($event)" [(ngModel)]="barMaxWidth">
+      </div>
+      <div class="option-box">
+        <label>Bar Gap</label>
+        <input type="text" (ngModelChange)="onChangeBarGap($event)" [(ngModel)]="barGap">
+      </div>
+<!--      <div class="option-box">-->
+<!--        <label>Bar Category Gap</label>-->
+<!--        <input type="text" (ngModelChange)="onChangeBarCategoryGap($event)" [(ngModel)]="barCategoryGap">-->
+<!--      </div>-->
+    </ng-container>
+  </ng-container>
+</div>

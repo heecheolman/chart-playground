@@ -1,0 +1,19 @@
+<h2>Chart</h2>
+<div class="option-box">
+  <label>차트높이</label><input type="number" [(ngModel)]="height">
+</div>
+<div class="option-box">
+  <label>Bar</label>
+  <input type="radio" name="chartType" [(ngModel)]="type" value="bar" (ngModelChange)="onChartTypeChange($event)">
+  <label>Line</label>
+  <input type="radio" name="chartType" [(ngModel)]="type" value="line" (ngModelChange)="onChartTypeChange($event)">
+  <label>Area</label>
+  <input type="radio" name="chartType" [(ngModel)]="type" value="area" (ngModelChange)="onChartTypeChange($event)">
+</div>
+<div class="option-box">
+  <label>Stacked</label>
+  <input type="checkbox" [(ngModel)]="stacked" (ngModelChange)="onStackedChange($event)">
+</div>
+
+<button type="submit" (click)="onCreate()">Chart 생성</button>
+

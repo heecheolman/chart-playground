@@ -1,0 +1,56 @@
+<h2>Tooltip</h2>
+<div class="group-box">
+  <h3>툴팁</h3>
+  <div class="option-box">
+    <label>툴팁 보이기</label>
+    <input type="checkbox" (ngModelChange)="onChangeShow($event)" [(ngModel)]="show">
+  </div>
+  <div class="option-box">
+    <label>Trigger 타입</label>
+      item: <input type="radio" name="trigger" value="item" (ngModelChange)="onChangeTrigger($event)" [(ngModel)]="trigger">
+      axis: <input type="radio" name="trigger" value="axis" (ngModelChange)="onChangeTrigger($event)" [(ngModel)]="trigger">
+      none: <input type="radio" name="trigger" value="none" (ngModelChange)="onChangeTrigger($event)" [(ngModel)]="trigger">
+  </div>
+  <h3>AxisPointer</h3>
+  <div class="option-box">
+    <label>type</label>
+      line: <input type="radio" name="axisPointerType" value="line" (ngModelChange)="onChangeAxisPointerType($event)" [(ngModel)]="axisPointerType">
+      shadow: <input type="radio" name="axisPointerType" value="shadow" (ngModelChange)="onChangeAxisPointerType($event)" [(ngModel)]="axisPointerType">
+      cross: <input type="radio" name="axisPointerType" value="cross" (ngModelChange)="onChangeAxisPointerType($event)" [(ngModel)]="axisPointerType">
+      none: <input type="radio" name="axisPointerType" value="none" (ngModelChange)="onChangeAxisPointerType($event)" [(ngModel)]="axisPointerType">
+  </div>
+
+  <h3>AxisPointer LineStyle</h3>
+  <div class="option-box">
+    <label>색상</label>
+    <input type="color" (ngModelChange)="onChangeAxisPointerLineColor($event)" [(ngModel)]="axisPointerLineColor">
+  </div>
+  <div class="option-box">
+    <label>선 두께</label>
+    <input type="number" (ngModelChange)="onChangeAxisPointerLineWidth($event)" [(ngModel)]="axisPointerLineWidth">
+  </div>
+  <div class="option-box">
+    <label>선 스타일</label>
+    solid: <input type="radio" value="solid" name="lineStyleType" (ngModelChange)="onChangeAxisPointerLineType($event)" [(ngModel)]="axisPointerLineType">
+    dashed: <input type="radio" value="dashed" name="lineStyleType" (ngModelChange)="onChangeAxisPointerLineType($event)" [(ngModel)]="axisPointerLineType">
+    dotted: <input type="radio" value="dotted" name="lineStyleType" (ngModelChange)="onChangeAxisPointerLineType($event)" [(ngModel)]="axisPointerLineType">
+  </div>
+
+  <h3>AxisPointer ShadowStyle</h3>
+  <div class="option-box">
+    <label>색상</label>
+    <input type="color" opacity (ngModelChange)="onChangeAxisPointerShadowColor($event)" [(ngModel)]="axisPointerShadowColor">
+  </div>
+  <div class="option-box">
+    <label>blur</label>
+    <input type="number" (ngModelChange)="onChangeAxisPointerShadowBlur($event)" [(ngModel)]="axisPointerShadowBlur">
+  </div>
+  <div class="option-box">
+    <label>opacity</label>
+    <input type="number" step="0.1" (ngModelChange)="onChangeAxisPointerShadowOpacity($event)" [(ngModel)]="axisPointerShadowOpacity">
+    <input type="range" min="0" max="1" step="0.01" (ngModelChange)="onChangeAxisPointerShadowOpacity($event)" [(ngModel)]="axisPointerShadowOpacity">
+
+    {{ axisPointerShadowOpacity }}
+  </div>
+
+</div>

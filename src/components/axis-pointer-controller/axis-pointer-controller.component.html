@@ -1,0 +1,20 @@
+<h2>Axis Pointer</h2>
+
+<div class="group-box">
+  <div class="option-box">
+    <label>axisPointer 사용</label>
+    <input type="checkbox" (ngModelChange)="onChangeAxisPointerShow($event)" [(ngModel)]="show">
+  </div>
+  <div class="option-box">
+    <label>타입</label>
+    <div>
+      line:<input name="type" type="radio" value="line" [(ngModel)]="type" (ngModelChange)="onChangeAxisPointerType($event)">
+    </div>
+    <div>
+      shadow:<input name="type" type="radio" value="shadow"  [(ngModel)]="type" (ngModelChange)="onChangeAxisPointerType($event)">
+    </div>
+    <div>
+      none:<input name="type" type="radio" value="none"  [(ngModel)]="type" (ngModelChange)="onChangeAxisPointerType($event)">
+    </div>
+  </div>
+</div>
