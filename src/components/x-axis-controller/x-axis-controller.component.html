@@ -4,78 +4,78 @@
   <div class="option-box">
     <div class="option-name"></div>
     <label>x축 보이기</label>
-    <input type="checkbox" (ngModelChange)="onChangeShow($event)" [(ngModel)]="show">
+    <input type="checkbox" (ngModelChange)="onChangeOption({ show: $event })" [(ngModel)]="controlOption.show">
   </div>
 
   <div class="option-box">
     <label>boundaryGap</label>
-    <input type="checkbox" (ngModelChange)="onChangeBoundaryGap($event)" [(ngModel)]="boundaryGap">
+    <input type="checkbox" (ngModelChange)="onChangeOption({ boundaryGap: $event })" [(ngModel)]="controlOption.boundaryGap">
   </div>
 
   <div class="option-box">
     <label>x축 offset</label>
-    <input type="number" (ngModelChange)="onChangeAxisOffset($event)" [(ngModel)]="axisOffset">
+    <input type="number" (ngModelChange)="onChangeOption({ offset: $event })" [(ngModel)]="controlOption.offset">
   </div>
 
   <h3>axisLine</h3>
   <div class="option-box">
     <label>axisLine 보이기</label>
-    <input type="checkbox" (ngModelChange)="onChangeAxisLineShow($event)" [(ngModel)]="axisLineShow">
+    <input type="checkbox" (ngModelChange)="onChangeAxisLineOption( { show: $event })" [(ngModel)]="controlOption.axisLine.show">
   </div>
   <div class="option-box">
     <label>색상</label>
-    <input type="color" (ngModelChange)="onChangeAxisLineStyleColor($event)" [(ngModel)]="axisLineStyleColor">
+    <input type="color" (ngModelChange)="onChangeAxisLineOption({ lineStyle: { color: $event }})" [(ngModel)]="controlOption.axisLine.lineStyle.color">
   </div>
 
   <h3>axisLabel</h3>
   <div class="option-box">
     <label>라벨 보이기</label>
-    <input type="checkbox" (ngModelChange)="onChangeAxisLabelShow($event)" [(ngModel)]="axisLabelShow">
+    <input type="checkbox" (ngModelChange)="onChangeAxisLabelOption({ show: $event })" [(ngModel)]="controlOption.axisLabel.show">
   </div>
   <div class="option-box">
     <label>색상</label>
-    <input type="color" (ngModelChange)="onChangeAxisLabelColor($event)" [(ngModel)]="axisLabelColor">
+    <input type="color" (ngModelChange)="onChangeAxisLabelOption({ color: $event })" [(ngModel)]="controlOption.axisLabel.color">
   </div>
   <div class="option-box">
     <label>axisLabel 폰트 크기 조절</label>
-    <input type="number" (ngModelChange)="onChangeAxisLabelFontSize($event)" [(ngModel)]="axisLabelFontSize">
+    <input type="number" (ngModelChange)="onChangeAxisLabelOption({ fontSize: $event })" [(ngModel)]="controlOption.axisLabel.fontSize">
   </div>
   <div class="option-box">
     <label>axisLabel margin 조절</label>
-    <input type="number" (ngModelChange)="onChangeAxisLabelMargin($event)" [(ngModel)]="axisLabelMargin">
+    <input type="number" (ngModelChange)="onChangeAxisLabelOption({ margin: $event })" [(ngModel)]="controlOption.axisLabel.margin">
   </div>
 
-  <h3>axisTick</h3>
-  <div class="option-box">
-    <label>axisTick 보이기</label>
-    <input type="checkbox" (ngModelChange)="onChangeAxisTickShow($event)" [(ngModel)]="axisTickShow">
-  </div>
-  <div class="option-box">
-    <label>axisTick 라벨로 정렬</label>
-    <input type="checkbox" (ngModelChange)="onChangeAxisTickAlignWidthLabel($event)"
-           [(ngModel)]="axisTickAlignWidthLabel">
-  </div>
-  <div class="option-box">
-    <label>axisTick 길이 조절</label>
-    <input type="number" (ngModelChange)="onChangeAxisTickLength($event)" [(ngModel)]="axisTickLength">
-  </div>
-  <div class="option-box">
-    <label>axisTick 색상 조절</label>
-    <input type="color" (ngModelChange)="onChangeAxisTickLineStyleColor($event)" [(ngModel)]="axisTickLineStyleColor">
-  </div>
+<!--  <h3>axisTick</h3>-->
+<!--  <div class="option-box">-->
+<!--    <label>axisTick 보이기</label>-->
+<!--    <input type="checkbox" (ngModelChange)="onChangeAxisTickShow($event)" [(ngModel)]="axisTickShow">-->
+<!--  </div>-->
+<!--  <div class="option-box">-->
+<!--    <label>axisTick 라벨로 정렬</label>-->
+<!--    <input type="checkbox" (ngModelChange)="onChangeAxisTickAlignWidthLabel($event)"-->
+<!--           [(ngModel)]="axisTickAlignWidthLabel">-->
+<!--  </div>-->
+<!--  <div class="option-box">-->
+<!--    <label>axisTick 길이 조절</label>-->
+<!--    <input type="number" (ngModelChange)="onChangeAxisTickLength($event)" [(ngModel)]="axisTickLength">-->
+<!--  </div>-->
+<!--  <div class="option-box">-->
+<!--    <label>axisTick 색상 조절</label>-->
+<!--    <input type="color" (ngModelChange)="onChangeAxisTickLineStyleColor($event)" [(ngModel)]="axisTickLineStyleColor">-->
+<!--  </div>-->
 
-  <h3>splitLine</h3>
-  <div class="option-box">
-    <label>splitLine 보이기</label>
-    <input type="checkbox" (ngModelChange)="onChangeSplitLineShow($event)" [(ngModel)]="splitLineShow">
-  </div>
-  <div class="option-box">
-    <label>splitLine 반복 범위</label>
-    <input type="number" (ngModelChange)="onChangeSplitLineInterval($event)" [(ngModel)]="splitLineInterval">
-  </div>
+<!--  <h3>splitLine</h3>-->
+<!--  <div class="option-box">-->
+<!--    <label>splitLine 보이기</label>-->
+<!--    <input type="checkbox" (ngModelChange)="onChangeSplitLineShow($event)" [(ngModel)]="splitLineShow">-->
+<!--  </div>-->
+<!--  <div class="option-box">-->
+<!--    <label>splitLine 반복 범위</label>-->
+<!--    <input type="number" (ngModelChange)="onChangeSplitLineInterval($event)" [(ngModel)]="splitLineInterval">-->
+<!--  </div>-->
 
-  <div class="option-box">
-    <label>splitLine 색상 조절</label>
-    <input type="color" (ngModelChange)="onChangeSplitLineStyleColor($event)" [(ngModel)]="splitLineStyleColor">
-  </div>
+<!--  <div class="option-box">-->
+<!--    <label>splitLine 색상 조절</label>-->
+<!--    <input type="color" (ngModelChange)="onChangeSplitLineStyleColor($event)" [(ngModel)]="splitLineStyleColor">-->
+<!--  </div>-->
 </div>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import Grid, { GridOption } from '../libs/chart/grid';
+import XAxis, { XAxisOption } from '../libs/chart/x-axis';
 
 @Component({
   selector: 'app-root',
@@ -6,11 +8,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  options;
+  inputOption;
+  option;
+  options = [];
+
+  gridOption: Partial<GridOption>;
+  tooltipOption;
+  xAxisOption: Partial<XAxisOption> = {
+    data: ['월', '화', '수', '목', '금', '토', '일'],
+  };
+  yAxisOption;
+  seriesOption;
 
   onGridOptionBuild(option: any): void {
-    this.options = {
-      ...this.options,
+    this.option = {
+      ...this.option,
       grid: {
         ...option,
       }
@@ -18,21 +30,20 @@ export class AppComponent {
   }
 
   onXAxisOptionBuild(option: any): void {
-    this.options = {
-      ...this.options,
+    this.option = {
+      ...this.option,
       xAxis: {
-        ...this.options.xAxis,
+        ...this.option.xAxis,
         ...option,
       },
     };
-    console.log(this.options);
   }
 
   onYAxisOptionBuild(option: any): void {
-    this.options = {
-      ...this.options,
+    this.option = {
+      ...this.option,
       yAxis: {
-        ...this.options.yAxis,
+        ...this.option.yAxis,
         ...option,
       },
     };
@@ -59,25 +70,41 @@ export class AppComponent {
         ...s,
       };
     });
-    this.options = {
-      ...this.options,
+    this.option = {
+      ...this.option,
       series: seriesOption
     };
-    console.log('this.options', this.options);
   }
 
   onAxisPointerOptionBuilder(option: any): void {
-    this.options = {
-      ...this.options,
+    this.option = {
+      ...this.option,
       axisPointer: {
         ...option,
       },
     };
   }
 
+  onApplyOption(): void {
+    // const {
+    //   grid,
+    //   tooltip,
+    //   xAxis,
+    //   yAxis,
+    //   series
+    // } = this.option;
+    // this.gridOption = {
+    //   show: true,
+    // };
+    // this.tooltipOption = tooltip;
+    // this.xAxisOption = xAxis;
+    // this.yAxisOption = yAxis;
+    // this.seriesOption = series;
+  }
+
   onTooltipOptionBuilder(option: any): void {
-    this.options = {
-      ...this.options,
+    this.option = {
+      ...this.option,
       tooltip: {
         ...option,
       }
@@ -89,7 +116,7 @@ export class AppComponent {
   }
 
   createOption(): void {
-    this.options = {
+    this.option = {
       // color: ['#3398DB'],
       tooltip: {
         trigger: 'axis',
@@ -97,14 +124,8 @@ export class AppComponent {
           type: 'shadow',
         },
       },
-      grid: {
-        containLabel: true,
-      },
-      xAxis: {
-        type: 'category',
-        show: true,
-        data: ['월', '화', '수', '목', '금', '토', '일'],
-      },
+      grid: this.gridOption,
+      xAxis: this.xAxisOption,
       yAxis: {
         type: 'value',
       },
@@ -133,5 +154,10 @@ export class AppComponent {
         },
       ],
     };
+  }
+
+  onCreateOption(): void {
+    const option = this.option;
+    this.options.push(option);
   }
 }

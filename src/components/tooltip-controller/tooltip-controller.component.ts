@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tooltip-controller',
@@ -6,6 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./tooltip-controller.component.scss']
 })
 export class TooltipControllerComponent implements OnInit {
+  @Input() option;
   @Output() build: EventEmitter<any> = new EventEmitter<any>();
 
   show = true;

@@ -1,10 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-y-axis-controller',
   templateUrl: 'y-axis-controller.component.html',
 })
 export class YAxisControllerComponent implements OnInit {
+  @Input() option;
   @Output() build: EventEmitter<any> = new EventEmitter<any>();
   show = true;
   boundaryGap = false;
@@ -153,7 +154,7 @@ export class YAxisControllerComponent implements OnInit {
 
   onCreate(): void {
     const option = this.createOption();
-    console.log('@@XAxisOption@@=>', option);
+    // console.log('@@XAxisOption@@=>', option);
     this.build.emit(this.createOption());
   }
 }

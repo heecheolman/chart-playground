@@ -2,18 +2,18 @@
 <div class="group-box">
   <div class="option-box">
     <label>width:</label>
-    <input type="text" placeholder="auto" (ngModelChange)="onChangeWidth($event)" [(ngModel)]="width">
+    <input type="text" placeholder="auto" [(ngModel)]="controlOption.width" (ngModelChange)="onChangeOption({ width: $event })">
   </div>
   <div class="option-box">
     <label>height:</label>
-    <input type="text" placeholder="auto" (ngModelChange)="onChangeHeight($event)" [(ngModel)]="height">
+    <input type="text" placeholder="auto" [(ngModel)]="controlOption.height" (ngModelChange)="onChangeOption({ height: $event })">
   </div>
   <div class="option-box">
     <label>containLabel</label>
-    <input type="checkbox" (ngModelChange)="onChangeContainLabel($event)" [(ngModel)]="containLabel">
+    <input type="checkbox" [(ngModel)]="controlOption.containLabel" (ngModelChange)="onChangeOption({ containLabel: $event })">
   </div>
   <div class="option-box">
     <label>그리드 보기</label>
-    <input type="checkbox" (ngModelChange)="onChangeShowGrid($event)" [(ngModel)]="show">
+    <input type="checkbox" [(ngModel)]="controlOption.show" (ngModelChange)="onChangeOption({ show: $event })">
   </div>
 </div>
