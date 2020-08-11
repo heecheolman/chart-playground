@@ -1,18 +1,3 @@
-<!--<div id="chart">-->
-<!--  <apx-chart-->
-<!--    [series]="chartOptions.series"-->
-<!--    [chart]="chartOptions.chart"-->
-<!--    [dataLabels]="chartOptions.dataLabels"-->
-<!--    [plotOptions]="chartOptions.plotOptions"-->
-<!--    [yaxis]="chartOptions.yaxis"-->
-<!--    [grid]="chartOptions.grid"-->
-<!--    [legend]="chartOptions.legend"-->
-<!--    [fill]="chartOptions.fill"-->
-<!--    [stroke]="chartOptions.stroke"-->
-<!--    [tooltip]="chartOptions.tooltip"-->
-<!--    [xaxis]="chartOptions.xaxis"-->
-<!--  ></apx-chart>-->
-<!--</div>-->
 <textarea [(ngModel)]="inputOption"></textarea>
 <button (click)="onApplyOption()">적용</button>
 
@@ -22,9 +7,10 @@
   <div style="display: flex;">
     <app-grid-controller [controlOption]="gridOption" (build)="onGridOptionBuild($event)"></app-grid-controller>
     <app-x-axis-controller [controlOption]="xAxisOption" (build)="onXAxisOptionBuild($event)"></app-x-axis-controller>
-    <app-y-axis-controller (build)="onYAxisOptionBuild($event)"></app-y-axis-controller>
-    <app-tooltip-controller (build)="onTooltipOptionBuilder($event)"></app-tooltip-controller>
-    <app-series-controller (build)="onSeriesOptionBuilder($event)"></app-series-controller>
+    <app-y-axis-controller [controlOption]="yAxisOption" (build)="onYAxisOptionBuild($event)"></app-y-axis-controller>
+    <app-tooltip-controller [controlOption]="tooltipOption" (build)="onTooltipOptionBuild($event)"></app-tooltip-controller>
+    <app-legend-controller (build)="onLegendOptionBuild($event)"></app-legend-controller>
+<!--    <app-series-controller (build)="onSeriesOptionBuilder($event)"></app-series-controller>-->
   </div>
   <div>
     <button (click)="onCreateOption()">옵션 생성</button>

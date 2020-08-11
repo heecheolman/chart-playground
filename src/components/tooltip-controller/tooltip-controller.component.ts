@@ -1,97 +1,43 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AxisPointerOption } from '../../libs/chart/axis-pointer';
+import Tooltip, { TooltipOption } from '../../libs/chart/tooltip';
 
 @Component({
   selector: 'app-tooltip-controller',
   templateUrl: './tooltip-controller.component.html',
   styleUrls: ['./tooltip-controller.component.scss']
 })
-export class TooltipControllerComponent implements OnInit {
-  @Input() option;
-  @Output() build: EventEmitter<any> = new EventEmitter<any>();
+export class TooltipControllerComponent extends Tooltip implements OnInit {
+  @Input() controlOption: TooltipOption;
+  @Output() build: EventEmitter<TooltipOption> = new EventEmitter<TooltipOption>();
 
-  show = true;
-  trigger: 'item' | 'axis' | 'none' = 'axis';
-  axisPointerType: 'line' | 'shadow' | 'none' | 'cross' = 'shadow';
-
-  axisPointerLineColor = '#555';
-  axisPointerLineWidth = 1;
-  axisPointerLineType: 'solid' | 'dashed' | 'dotted' = 'solid';
-
-  axisPointerShadowColor = '#000000';
-  axisPointerShadowBlur = 0;
-  axisPointerShadowOpacity = 0.1;
-
-  onChangeShow(show: boolean): void {
-    this.show = show;
-    this.onCreate();
-  }
-
-  onChangeTrigger(trigger): void {
-    this.trigger = trigger;
-    this.onCreate();
-  }
-
-  onChangeAxisPointerType(axisPointerType): void {
-    this.axisPointerType = axisPointerType;
-    this.onCreate();
-  }
-
-  onChangeAxisPointerLineColor(color: string): void {
-    this.axisPointerLineColor = color;
-    this.onCreate();
-  }
-
-  onChangeAxisPointerLineWidth(width: number): void {
-    this.axisPointerLineWidth = width;
-    this.onCreate();
-  }
-
-  onChangeAxisPointerLineType(type): void {
-    this.axisPointerLineType = type;
-    this.onCreate();
-  }
-
-  onChangeAxisPointerShadowColor(color: string): void {
-    this.axisPointerShadowColor = color;
-    this.onCreate();
-  }
-
-  onChangeAxisPointerShadowBlur(blur: number): void {
-    this.axisPointerShadowBlur = blur;
-    this.onCreate();
-  }
-
-  onChangeAxisPointerShadowOpacity(opacity: number): void {
-    this.axisPointerShadowOpacity = opacity;
-    this.onCreate();
+  constructor() {
+    super();
   }
 
   ngOnInit(): void {
+    super.setOption(this.controlOption);
+    this.onCreate();
   }
 
-  createOption(): any {
-    return {
-      show: this.show,
-      trigger: this.trigger,
-      axisPointer: {
-        type: this.axisPointerType,
-        lineStyle: {
-          color: this.axisPointerLineColor,
-          width: this.axisPointerLineWidth,
-          type: this.axisPointerLineType,
-        },
-        shadowStyle: {
-          color: this.axisPointerShadowColor,
-          shadowBlur: this.axisPointerShadowBlur,
-          opacity: this.axisPointerShadowOpacity,
-        }
-      }
-    };
+  onChangeOption(changed: Partial<TooltipOption>): void {
+    super.setOption({
+      ...changed,
+    });
+    this.onCreate();
+  }
+
+  onChangeAxisPointerOption(changed: Partial<AxisPointerOption>): void {
+    super.getAxisPointer().setOption({
+      ...changed,
+    });
+    this.onCreate();
   }
 
   onCreate(): void {
-    const option = this.createOption();
-    console.log('@@TooltipOption@@=>', option);
-    this.build.emit(this.createOption());
+    const option = super.getOption();
+    this.controlOption = option;
+    this.build.emit(option);
+    console.log('(TooltipOption) ->', option);
   }
 }

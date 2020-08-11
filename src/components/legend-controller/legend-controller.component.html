@@ -1,0 +1,85 @@
+<h2>Legend</h2>
+<div class="group-box">
+  <div class="option-box">
+    <label>보이기</label>
+    <input type="checkbox" (ngModelChange)="onChangeOption({ show: $event })" [(ngModel)]="controlOption.show">
+  </div>
+  <div class="option-box">
+    <label>orient</label>
+    horizontal: <input type="radio" name="orient" value="horizontal" (ngModelChange)="onChangeOption({ orient: $event })" [(ngModel)]="controlOption.orient">
+    vertical: <input type="radio" name="orient" value="vertical" (ngModelChange)="onChangeOption({ orient: $event })" [(ngModel)]="controlOption.orient">
+  </div>
+  <div class="option-box">
+    <label>align</label>
+    auto: <input type="radio" name="align" value="auto" (ngModelChange)="onChangeOption({ align: $event })" [(ngModel)]="controlOption.align">
+    left: <input type="radio" name="align" value="left" (ngModelChange)="onChangeOption({ align: $event })" [(ngModel)]="controlOption.align">
+    right: <input type="radio" name="align" value="center" (ngModelChange)="onChangeOption({ align: $event })" [(ngModel)]="controlOption.align">
+  </div>
+
+  <div class="option-box">
+<!--    'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'-->
+    <label>item</label>
+    circle: <input type="radio" name="item" value="circle" (ngModelChange)="onChangeOption({ icon: $event })" [(ngModel)]="controlOption.icon">
+    rect: <input type="radio" name="item" value="rect" (ngModelChange)="onChangeOption({ icon: $event })" [(ngModel)]="controlOption.icon">
+    roundRect: <input type="radio" name="item" value="roundRect" (ngModelChange)="onChangeOption({ icon: $event })" [(ngModel)]="controlOption.icon">
+    triangle: <input type="radio" name="item" value="triangle" (ngModelChange)="onChangeOption({ icon: $event })" [(ngModel)]="controlOption.icon">
+    diamond: <input type="radio" name="item" value="diamond" (ngModelChange)="onChangeOption({ icon: $event })" [(ngModel)]="controlOption.icon">
+    pin: <input type="radio" name="item" value="pin" (ngModelChange)="onChangeOption({ icon: $event })" [(ngModel)]="controlOption.icon">
+    arrow: <input type="radio" name="item" value="arrow" (ngModelChange)="onChangeOption({ icon: $event })" [(ngModel)]="controlOption.icon">
+    none: <input type="radio" name="item" value="none" (ngModelChange)="onChangeOption({ icon: $event })" [(ngModel)]="controlOption.icon">
+  </div>
+
+  <div class="option-box">
+    <label>inactiveColor</label>
+    <input type="color" (ngModelChange)="onChangeOption({ inactiveColor: $event })" [(ngModel)]="controlOption.inactiveColor">
+  </div>
+
+  <div class="option-box">
+    <label>top</label>
+    <input type="text" (ngModelChange)="onChangeOption({ top: $event })" [(ngModel)]="controlOption.top">
+  </div>
+  <div class="option-box">
+    <label>right</label>
+    <input type="text" (ngModelChange)="onChangeOption({ right: $event })" [(ngModel)]="controlOption.right">
+  </div>
+  <div class="option-box">
+    <label>bottom</label>
+    <input type="text" (ngModelChange)="onChangeOption({ bottom: $event })" [(ngModel)]="controlOption.bottom">
+  </div>
+  <div class="option-box">
+    <label>left</label>
+    <input type="text" (ngModelChange)="onChangeOption({ left: $event })" [(ngModel)]="controlOption.left">
+  </div>
+
+  <div class="option-box">
+    <label>itemGap</label>
+    <input type="number" (ngModelChange)="onChangeOption({ itemGap: $event })" [(ngModel)]="controlOption.itemGap">
+  </div>
+  <div class="option-box">
+    <label>itemWidth</label>
+    <input type="number" (ngModelChange)="onChangeOption({ itemWidth: $event })" [(ngModel)]="controlOption.itemWidth">
+  </div>
+  <div class="option-box">
+    <label>itemHeight</label>
+    <input type="number" (ngModelChange)="onChangeOption({ itemHeight: $event })" [(ngModel)]="controlOption.itemHeight">
+  </div>
+
+  <h3>textStyle</h3>
+  <div class="option-box">
+    <label>color</label>
+    <input type="color" (ngModelChange)="onChangeOption({ textStyle: { color: $event }})" [(ngModel)]="controlOption.textStyle.color">
+  </div>
+  <div class="option-box">
+    <label>fontSize</label>
+    <input type="number" (ngModelChange)="onChangeOption({ textStyle: { fontSize: $event }})" [(ngModel)]="controlOption.textStyle.fontSize">
+  </div>
+  <div class="option-box">
+    <label>fontWeight</label>
+    normal: <input type="radio" value="normal" (ngModelChange)="onChangeOption({ textStyle: { fontWeight: $event }})" [(ngModel)]="controlOption.textStyle.fontWeight">
+    lighter: <input type="radio" value="lighter" (ngModelChange)="onChangeOption({ textStyle: { fontWeight: $event }})" [(ngModel)]="controlOption.textStyle.fontWeight">
+    bold: <input type="radio" value="bold" (ngModelChange)="onChangeOption({ textStyle: { fontWeight: $event }})" [(ngModel)]="controlOption.textStyle.fontWeight">
+    bolder: <input type="radio" value="bolder" (ngModelChange)="onChangeOption({ textStyle: { fontWeight: $event }})" [(ngModel)]="controlOption.textStyle.fontWeight">
+  </div>
+
+
+</div>

@@ -18,7 +18,6 @@ class SplitLine extends ChartOption<SplitLineOption> {
   }) {
     super(option);
   }
-
 }
 
 export default SplitLine;

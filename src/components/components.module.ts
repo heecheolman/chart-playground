@@ -8,6 +8,7 @@ import { XAxisControllerComponent } from './x-axis-controller/x-axis-controller.
 import { YAxisControllerComponent } from './y-axis-controller/y-axis-controller.component';
 import { TooltipControllerComponent } from './tooltip-controller/tooltip-controller.component';
 import { SeriesControllerComponent } from './series-controller/series-controller.component';
+import { LegendControllerComponent } from './legend-controller/legend-controller.component';
 
 const COMPONENTS = [
   GridControllerComponent,
@@ -16,11 +17,12 @@ const COMPONENTS = [
   YAxisControllerComponent,
   AxisPointerControllerComponent,
   TooltipControllerComponent,
+  LegendControllerComponent,
   SeriesControllerComponent,
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, TooltipControllerComponent, SeriesControllerComponent],
+  declarations: [...COMPONENTS, TooltipControllerComponent, SeriesControllerComponent, LegendControllerComponent],
   imports: [FormsModule, CommonModule],
   exports: [...COMPONENTS],
 })

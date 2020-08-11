@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import Grid, { GridOption } from '../libs/chart/grid';
-import XAxis, { XAxisOption } from '../libs/chart/x-axis';
+import { GridOption } from '../libs/chart/grid';
+import { LegendOption } from '../libs/chart/legend';
+import { TooltipOption } from '../libs/chart/tooltip';
+import { XAxisOption } from '../libs/chart/x-axis';
 import { YAxisOption } from '../libs/chart/y-axis';
 
 @Component({
@@ -14,11 +16,12 @@ export class AppComponent {
   options = [];
 
   gridOption: Partial<GridOption>;
-  tooltipOption;
+  tooltipOption: Partial<TooltipOption>;
   xAxisOption: Partial<XAxisOption> = {
     data: ['월', '화', '수', '목', '금', '토', '일'],
   };
   yAxisOption: Partial<YAxisOption>;
+  legendOption: Partial<LegendOption>;
   seriesOption;
 
   onGridOptionBuild(option: any): void {
@@ -103,10 +106,19 @@ export class AppComponent {
     // this.seriesOption = series;
   }
 
-  onTooltipOptionBuilder(option: any): void {
+  onTooltipOptionBuild(option: any): void {
     this.option = {
       ...this.option,
       tooltip: {
+        ...option,
+      }
+    };
+  }
+
+  onLegendOptionBuild(option: any): void {
+    this.option = {
+      ...this.option,
+      legend: {
         ...option,
       }
     };
@@ -119,15 +131,11 @@ export class AppComponent {
   createOption(): void {
     this.option = {
       // color: ['#3398DB'],
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow',
-        },
-      },
+      tooltip: this.tooltipOption,
       grid: this.gridOption,
       xAxis: this.xAxisOption,
       yAxis: this.yAxisOption,
+      legend: this.legendOption,
       series: [
         {
           name: 'A',
