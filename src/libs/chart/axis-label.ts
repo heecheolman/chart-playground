@@ -1,4 +1,4 @@
-import ChartOption from './option';
+import ChartOption from './chart-option';
 
 export interface AxisLabelOption {
   show: boolean;
@@ -8,7 +8,7 @@ export interface AxisLabelOption {
 }
 
 class AxisLabel extends ChartOption<AxisLabelOption> {
-  constructor(option: AxisLabelOption = {
+  constructor(option: Partial<AxisLabelOption> = {
     show: true,
     color: '#6b6b6b',
     fontSize: 12,

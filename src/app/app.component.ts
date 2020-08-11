@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import Grid, { GridOption } from '../libs/chart/grid';
 import XAxis, { XAxisOption } from '../libs/chart/x-axis';
+import { YAxisOption } from '../libs/chart/y-axis';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
   xAxisOption: Partial<XAxisOption> = {
     data: ['월', '화', '수', '목', '금', '토', '일'],
   };
-  yAxisOption;
+  yAxisOption: Partial<YAxisOption>;
   seriesOption;
 
   onGridOptionBuild(option: any): void {
@@ -126,9 +127,7 @@ export class AppComponent {
       },
       grid: this.gridOption,
       xAxis: this.xAxisOption,
-      yAxis: {
-        type: 'value',
-      },
+      yAxis: this.yAxisOption,
       series: [
         {
           name: 'A',

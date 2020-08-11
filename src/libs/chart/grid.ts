@@ -1,4 +1,4 @@
-import ChartOption from './option';
+import ChartOption from './chart-option';
 
 export interface GridOption {
   show: boolean;
@@ -8,7 +8,7 @@ export interface GridOption {
 }
 
 export class Grid extends ChartOption<GridOption> {
-  constructor(option: GridOption = {
+  constructor(option: Partial<GridOption> = {
     show: false,
     width: 'auto',
     height: 'auto',

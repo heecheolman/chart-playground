@@ -15,7 +15,6 @@ export class GridControllerComponent extends Grid implements OnInit {
 
   ngOnInit(): void {
     super.setOption(this.controlOption);
-
     this.onCreate();
   }
 

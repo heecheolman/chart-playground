@@ -1,4 +1,4 @@
-import ChartOption from './option';
+import ChartOption from './chart-option';
 
 export interface AxisLineOption {
   show: boolean;
@@ -8,7 +8,7 @@ export interface AxisLineOption {
 }
 
 class AxisLine extends ChartOption<AxisLineOption> {
-  constructor(option: AxisLineOption = {
+  constructor(option: Partial<AxisLineOption> = {
     show: true,
     lineStyle: {
       color: '#e3e3e3',

@@ -1,7 +1,7 @@
 class ChartOption<T> {
   option: T;
 
-  constructor(option: T) {
+  constructor(option: Partial<T>) {
     this.setOption(option);
   }
 
