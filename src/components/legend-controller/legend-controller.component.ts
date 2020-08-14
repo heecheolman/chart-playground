@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import Legend, { LegendOption } from '../../libs/chart/legend';
 
 @Component({
@@ -6,7 +6,7 @@ import Legend, { LegendOption } from '../../libs/chart/legend';
   templateUrl: './legend-controller.component.html',
   styleUrls: ['./legend-controller.component.scss']
 })
-export class LegendControllerComponent extends Legend implements OnInit {
+export class LegendControllerComponent extends Legend implements OnInit, OnChanges {
   @Input() controlOption: Partial<LegendOption>;
   @Output() build: EventEmitter<LegendOption> = new EventEmitter<LegendOption>();
 
@@ -17,6 +17,13 @@ export class LegendControllerComponent extends Legend implements OnInit {
   ngOnInit(): void {
     super.setOption(this.controlOption);
     this.onCreate();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const current = changes.controlOption.currentValue;
+    if (current) {
+      super.setOption(current);
+    }
   }
 
   onChangeOption(changed: Partial<LegendOption>): void {

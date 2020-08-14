@@ -26,7 +26,7 @@ class YAxis extends ChartOption<YAxisOption> {
 
   constructor(option: Partial<YAxisOption> = {
     type: 'value',
-    data:  undefined,
+    data:  [],
     show: true,
     offset: 0,
     splitNumber: 5,
@@ -51,14 +51,41 @@ class YAxis extends ChartOption<YAxisOption> {
   getAxisLine(): AxisLine {
     return this.axisLine;
   }
+  setAxisLine(option: Partial<AxisLineOption>): void {
+    this.axisLine.setOption(option);
+    super.setOption({
+      axisLine: this.axisLine.getOption(),
+    });
+  }
+
   getAxisLabel(): AxisLabel {
     return this.axisLabel;
   }
+  setAxisLabel(option: Partial<AxisLabelOption>): void {
+    this.axisLabel.setOption(option);
+    super.setOption({
+      axisLabel: this.axisLabel.getOption(),
+    });
+  }
+
   getAxisTick(): AxisTick {
     return this.axisTick;
   }
+  setAxisTick(option: Partial<AxisTickOption>): void {
+    this.axisTick.setOption(option);
+    super.setOption({
+      axisTick: this.axisTick.getOption(),
+    });
+  }
+
   getSplitLine(): SplitLine {
     return this.splitLine;
+  }
+  setSplitLine(option: Partial<SplitLineOption>): void {
+    this.splitLine.setOption(option);
+    super.setOption({
+      splitLine: this.splitLine.getOption(),
+    });
   }
 }
 

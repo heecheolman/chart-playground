@@ -5,6 +5,10 @@ export interface AxisLabelOption {
   color: string;
   fontSize: number;
   margin: number;
+  interval: number | 'auto';
+  showMinLabel: boolean;
+  showMaxLabel: boolean;
+  formatter: (value: string, index: number) => string | null;
 }
 
 class AxisLabel extends ChartOption<AxisLabelOption> {
@@ -13,6 +17,10 @@ class AxisLabel extends ChartOption<AxisLabelOption> {
     color: '#6b6b6b',
     fontSize: 12,
     margin: 8,
+    interval: 'auto',
+    showMinLabel: null,
+    showMaxLabel: null,
+    formatter: null,
   }) {
     super(option);
   }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AxisPointerOption } from '../../libs/chart/axis-pointer';
 import Tooltip, { TooltipOption } from '../../libs/chart/tooltip';
 
@@ -7,8 +7,8 @@ import Tooltip, { TooltipOption } from '../../libs/chart/tooltip';
   templateUrl: './tooltip-controller.component.html',
   styleUrls: ['./tooltip-controller.component.scss']
 })
-export class TooltipControllerComponent extends Tooltip implements OnInit {
-  @Input() controlOption: TooltipOption;
+export class TooltipControllerComponent extends Tooltip implements OnInit, OnChanges {
+  @Input() controlOption: Partial<TooltipOption>;
   @Output() build: EventEmitter<TooltipOption> = new EventEmitter<TooltipOption>();
 
   constructor() {
@@ -18,6 +18,13 @@ export class TooltipControllerComponent extends Tooltip implements OnInit {
   ngOnInit(): void {
     super.setOption(this.controlOption);
     this.onCreate();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const current = changes.controlOption.currentValue;
+    if (current) {
+      super.setOption(current);
+    }
   }
 
   onChangeOption(changed: Partial<TooltipOption>): void {

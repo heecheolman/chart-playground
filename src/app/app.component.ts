@@ -1,28 +1,96 @@
-import { Component } from '@angular/core';
-import { GridOption } from '../libs/chart/grid';
-import { LegendOption } from '../libs/chart/legend';
-import { TooltipOption } from '../libs/chart/tooltip';
-import { XAxisOption } from '../libs/chart/x-axis';
-import { YAxisOption } from '../libs/chart/y-axis';
+import { Component, OnInit } from '@angular/core';
+import Grid, { GridOption } from '../libs/chart/grid';
+import Legend, { LegendOption } from '../libs/chart/legend';
+import Series from '../libs/chart/series/series';
+import SeriesFactory from '../libs/chart/series/series-factory';
+import { SeriesOption, SeriesType } from '../libs/chart/series/series.types';
+import Tooltip, { TooltipOption } from '../libs/chart/tooltip';
+import XAxis, { XAxisOption } from '../libs/chart/x-axis';
+import YAxis, { YAxisOption } from '../libs/chart/y-axis';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   inputOption;
   option;
   options = [];
 
   gridOption: Partial<GridOption>;
   tooltipOption: Partial<TooltipOption>;
-  xAxisOption: Partial<XAxisOption> = {
-    data: ['월', '화', '수', '목', '금', '토', '일'],
-  };
+  xAxisOption: Partial<XAxisOption>;
   yAxisOption: Partial<YAxisOption>;
   legendOption: Partial<LegendOption>;
-  seriesOption;
+  seriesOption: SeriesOption[];
+
+  ngOnInit(): void {
+    // this.createOption();
+    this.createManually();
+  }
+
+  createManually(): void {
+    const grid = new Grid();
+    const legend = new Legend();
+    const tooltip = new Tooltip();
+    // tooltip.setOption({
+      // formatter(params, ticket, cb): string {
+      //   console.log(params, ticket, cb);
+      //   return params.map((param) => {
+      //     return `<div>${param.marker}</div>`;
+      //   }).join('');
+      // },
+    // });
+    const xAxis = new XAxis({
+      data: ['A', 'B', 'C', 'D']
+    });
+    xAxis.setAxisLabel({
+      formatter(value: string): string {
+        return value;
+      }
+    });
+    const yAxis = new YAxis();
+    yAxis.setAxisLabel({
+      formatter(value: string): string {
+        return value + '원';
+      }
+    });
+    const series = new Series([
+      SeriesFactory.createSeries(SeriesType.LINE, {
+        name: 'A',
+        stack: 'ee',
+        data: [300, 100, 200, 600],
+        smooth: true,
+        symbolSize: 10,
+        color: '#f95656',
+      }).getOption(),
+      SeriesFactory.createSeries(SeriesType.LINE, {
+        name: 'B',
+        stack: 'e',
+        data: [100, 200, 700, 800],
+        color: '#6e84ff',
+        symbolSize: 10,
+        smooth: true,
+      }).getOption(),
+    ]);
+
+    this.gridOption = grid.getOption();
+    this.tooltipOption = tooltip.getOption();
+    this.legendOption = legend.getOption();
+    this.xAxisOption = xAxis.getOption();
+    this.yAxisOption = yAxis.getOption();
+    this.seriesOption = series.getOption();
+
+    this.option = {
+      grid,
+      legend,
+      tooltip,
+      xAxis,
+      yAxis,
+      series,
+    };
+  }
 
   onGridOptionBuild(option: any): void {
     this.option = {
@@ -53,30 +121,10 @@ export class AppComponent {
     };
   }
 
-  onSeriesOptionBuilder(option: any): void {
-    const series = [
-      {
-        name: 'A',
-        data: [10, 52, 200, 334, 390, 330, 220],
-      },
-      {
-        name: 'B',
-        data: [40, 22, 100, 634, 490, 310, 20],
-      },
-      {
-        name: 'C',
-        data: [310, 252, 100, 534, 30, 350, 210],
-      }
-    ];
-    const seriesOption = series.map(s => {
-      return {
-        ...option,
-        ...s,
-      };
-    });
+  onSeriesOptionBuild(series): void {
     this.option = {
       ...this.option,
-      series: seriesOption
+      series,
     };
   }
 
@@ -90,20 +138,24 @@ export class AppComponent {
   }
 
   onApplyOption(): void {
-    // const {
-    //   grid,
-    //   tooltip,
-    //   xAxis,
-    //   yAxis,
-    //   series
-    // } = this.option;
-    // this.gridOption = {
-    //   show: true,
-    // };
-    // this.tooltipOption = tooltip;
-    // this.xAxisOption = xAxis;
-    // this.yAxisOption = yAxis;
-    // this.seriesOption = series;
+    const option = JSON.parse(this.inputOption);
+    console.log('inputOption', option);
+    const {
+      grid,
+      tooltip,
+      legend,
+      xAxis,
+      yAxis,
+      series,
+    } = option;
+
+    this.gridOption = grid;
+    this.tooltipOption = tooltip;
+    this.legendOption = legend;
+    this.xAxisOption = xAxis;
+    this.yAxisOption = yAxis;
+    this.seriesOption = series;
+    this.createOption();
   }
 
   onTooltipOptionBuild(option: any): void {
@@ -124,42 +176,14 @@ export class AppComponent {
     };
   }
 
-  constructor() {
-    this.createOption();
-  }
-
   createOption(): void {
     this.option = {
-      // color: ['#3398DB'],
-      tooltip: this.tooltipOption,
       grid: this.gridOption,
+      legend: this.legendOption,
+      tooltip: this.tooltipOption,
       xAxis: this.xAxisOption,
       yAxis: this.yAxisOption,
-      legend: this.legendOption,
-      series: [
-        {
-          name: 'A',
-          type: 'bar',
-          color: '#ff6b93',
-          // stack: 'a',
-          // barWidth: '60%',
-          data: [10, 52, 200, 334, 390, 330, 220],
-        },
-        {
-          name: 'B',
-          type: 'bar',
-          // stack: 'a',
-          color: '#ff91b0',
-          data: [40, 22, 100, 634, 490, 310, 20],
-        },
-        {
-          name: 'C',
-          type: 'bar',
-          // stack: 'a',
-          color: '#ffb0c5',
-          data: [310, 252, 100, 534, 30, 350, 210],
-        },
-      ],
+      series: this.seriesOption,
     };
   }
 

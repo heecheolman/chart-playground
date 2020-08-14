@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import Grid, { GridOption } from '../../libs/chart/grid';
 
 @Component({
   selector: 'app-grid-controller',
   templateUrl: './grid-controller.component.html'
 })
-export class GridControllerComponent extends Grid implements OnInit {
+export class GridControllerComponent extends Grid implements OnInit, OnChanges {
   @Input() controlOption: Partial<GridOption>;
   @Output() build: EventEmitter<GridOption> = new EventEmitter<GridOption>();
 
@@ -16,6 +16,13 @@ export class GridControllerComponent extends Grid implements OnInit {
   ngOnInit(): void {
     super.setOption(this.controlOption);
     this.onCreate();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const current = changes.controlOption.currentValue;
+    if (current) {
+      super.setOption(current);
+    }
   }
 
   onChangeOption(changed: Partial<GridOption>): void {

@@ -1,9 +1,18 @@
 <h2>X축 설정</h2>
 <div class="group-box">
-
+  <div class="option-box">
+    <label>축 타입</label>
+    category: <input type="radio" name="xAxisType" value="category" (ngModelChange)="onChangeOption({ type: $event })" [(ngModel)]="controlOption.type">
+    value: <input type="radio" name="xAxisType" value="value" (ngModelChange)="onChangeOption({ type: $event })" [(ngModel)]="controlOption.type">
+  </div>
   <div class="option-box">
     <label>x축 보이기</label>
     <input type="checkbox" (ngModelChange)="onChangeOption({ show: $event })" [(ngModel)]="controlOption.show">
+  </div>
+
+  <div class="option-box">
+    <div>labels</div>
+    <textarea (ngModelChange)="onChangeLabels($event)" [(ngModel)]="controlOption.data"></textarea>
   </div>
 
   <div class="option-box">
@@ -30,6 +39,18 @@
   <div class="option-box">
     <label>라벨 보이기</label>
     <input type="checkbox" (ngModelChange)="onChangeAxisLabelOption({ show: $event })" [(ngModel)]="controlOption.axisLabel.show">
+  </div>
+  <div class="option-box">
+    <label>라벨 interval</label>
+    <input type="number" (ngModelChange)="onChangeAxisLabelOption({ interval: $event })" [(ngModel)]="controlOption.axisLabel.interval">
+  </div>
+  <div class="option-box">
+    <label>라벨 첫번째 무조건 보이기</label>
+    <input type="checkbox" (ngModelChange)="onChangeAxisLabelOption({ showMinLabel: $event })" [(ngModel)]="controlOption.axisLabel.showMinLabel">
+  </div>
+  <div class="option-box">
+    <label>라벨 마지막 무조건 보이기</label>
+    <input type="checkbox" (ngModelChange)="onChangeAxisLabelOption({ showMaxLabel: $event })" [(ngModel)]="controlOption.axisLabel.showMaxLabel">
   </div>
   <div class="option-box">
     <label>색상</label>

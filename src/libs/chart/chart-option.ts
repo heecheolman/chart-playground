@@ -1,5 +1,5 @@
 class ChartOption<T> {
-  option: T;
+  protected option: T;
 
   constructor(option: Partial<T>) {
     this.setOption(option);

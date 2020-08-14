@@ -1,6 +1,26 @@
 import AxisPointer, { AxisPointerOption } from './axis-pointer';
 import ChartOption from './chart-option';
 
+type HTMLString = string;
+
+interface TooltipFormatParam {
+  componentType: 'series';
+  seriesType: string;
+  seriesIndex: number;
+  seriesName: string;
+  name: string;
+  dataIndex: number;
+  data: object;
+  value: number | [] | object;
+  encode: object;
+  dimensionNames: string[];
+  dimensionIndex: number;
+  color: string;
+  marker: HTMLString;
+  /* PIE 차트 */
+  percent: number;
+}
+
 export interface TooltipOption {
   show: boolean;
   trigger: 'item' | 'axis' | 'none';
@@ -9,8 +29,9 @@ export interface TooltipOption {
   borderWidth: number;
   padding: number;
   transitionDuration: number;
-
   axisPointer?: AxisPointerOption;
+
+  formatter: (params: TooltipFormatParam[], ticket: string, callback) => string | HTMLString;
 }
 
 class Tooltip extends ChartOption<TooltipOption> {
@@ -24,6 +45,7 @@ class Tooltip extends ChartOption<TooltipOption> {
     borderWidth: 0,
     borderColor: '#333',
     padding: 5,
+    formatter: null,
   }) {
     super(option);
     super.setOption({

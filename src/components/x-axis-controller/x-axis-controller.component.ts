@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AxisLabelOption } from '../../libs/chart/axis-label';
 import { AxisLineOption } from '../../libs/chart/axis-line';
 import { AxisTickOption } from '../../libs/chart/axis-tick';
@@ -9,7 +9,7 @@ import XAxis, { XAxisOption } from '../../libs/chart/x-axis';
   selector: 'app-x-axis-controller',
   templateUrl: 'x-axis-controller.component.html',
 })
-export class XAxisControllerComponent extends XAxis implements OnInit {
+export class XAxisControllerComponent extends XAxis implements OnInit, OnChanges {
   @Input() controlOption: Partial<XAxisOption>;
   @Output() build: EventEmitter<XAxisOption> = new EventEmitter<XAxisOption>();
 
@@ -22,9 +22,24 @@ export class XAxisControllerComponent extends XAxis implements OnInit {
     this.onCreate();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    const current = changes.controlOption.currentValue;
+    if (current) {
+      super.setOption(current);
+    }
+  }
+
   onChangeOption(changed: Partial<XAxisOption>): void {
     super.setOption({
       ...changed,
+    });
+    this.onCreate();
+  }
+
+  onChangeLabels(labels: string): void {
+    const data = labels.split(',').map((s) => s.trim());
+    super.setOption({
+      data,
     });
     this.onCreate();
   }

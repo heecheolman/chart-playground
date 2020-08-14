@@ -9,8 +9,11 @@
     <app-x-axis-controller [controlOption]="xAxisOption" (build)="onXAxisOptionBuild($event)"></app-x-axis-controller>
     <app-y-axis-controller [controlOption]="yAxisOption" (build)="onYAxisOptionBuild($event)"></app-y-axis-controller>
     <app-tooltip-controller [controlOption]="tooltipOption" (build)="onTooltipOptionBuild($event)"></app-tooltip-controller>
-    <app-legend-controller (build)="onLegendOptionBuild($event)"></app-legend-controller>
-<!--    <app-series-controller (build)="onSeriesOptionBuilder($event)"></app-series-controller>-->
+    <app-legend-controller [controlOption]="legendOption" (build)="onLegendOptionBuild($event)"></app-legend-controller>
+  </div>
+  <div>
+    <app-series-controller [controlSeries]="seriesOption" (build)="onSeriesOptionBuild($event)"></app-series-controller>
+
   </div>
   <div>
     <button (click)="onCreateOption()">옵션 생성</button>

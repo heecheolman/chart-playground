@@ -1,86 +1,73 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import ChartOption from '../../libs/chart/chart-option';
+import Series from '../../libs/chart/series/series';
+import SeriesFactory from '../../libs/chart/series/series-factory';
+import { SeriesOption, SeriesType } from '../../libs/chart/series/series.types';
 
 @Component({
   selector: 'app-series-controller',
   templateUrl: './series-controller.component.html',
   styleUrls: ['./series-controller.component.scss']
 })
-export class SeriesControllerComponent implements OnInit {
-  @Input() option;
-  @Output() build: EventEmitter<any> = new EventEmitter<any>();
+export class SeriesControllerComponent extends Series implements OnInit, OnChanges {
+  @Input() controlSeries: SeriesOption[] = [];
+  @Output() build: EventEmitter<SeriesOption[]> = new EventEmitter<SeriesOption[]>();
 
-  type: 'bar' | 'line' = 'bar';
-  stack = false;
-  barWidth = '50';
-  barMinWidth = '1';
-  barMaxWidth;
-  barGap = '30%';
-  barCategoryGap = '20%';
+  seriesType = 'bar';
+  seriesName = 'A';
+  seriesColor = '#e3e3e3';
+  seriesData = '[]';
+  series = [];
+
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
-  }
-
-  onChangeSeriesType(type): void {
-    this.type = type;
+    super.setOption(this.controlSeries);
     this.onCreate();
   }
 
-  onChangeSeriesStack(stack: boolean): void {
-    this.stack = stack;
-    this.onCreate();
-  }
-
-  onChangeBarWidth(width: string): void {
-    this.barWidth = width;
-    this.onCreate();
-  }
-
-  onChangeBarMinWidth(minWidth: string): void {
-    this.barMinWidth = minWidth;
-    this.onCreate();
-  }
-
-  onChangeBarMaxWidth(maxWidth: string): void {
-    this.barMaxWidth = maxWidth;
-    this.onCreate();
-  }
-
-  onChangeBarGap(gap: string): void {
-    this.barGap = gap;
-    this.onCreate();
-  }
-
-  onChangeBarCategoryGap(gap: string): void {
-    this.barCategoryGap = gap;
-    this.onCreate();
-  }
-
-  createOption(): any {
-    switch (this.type) {
-      case 'bar':
-        return {
-          type: this.type,
-          stack: this.stack ? 'A' : null,
-          barWidth: this.barWidth,
-          barMinWidth: this.barMinWidth,
-          barMaxWidth: this.barMaxWidth,
-          barGap: this.barGap,
-          // barCategoryGap: this.barCategoryGap,
-        };
-        break;
-      case 'line':
-        return {
-          type: this.type,
-          stack: this.stack ? 'A' : null,
-        };
-        break;
+  ngOnChanges(changes: SimpleChanges): void {
+    const current = changes.controlSeries.currentValue;
+    if (current) {
+      this.series = current;
     }
   }
 
+  createSeries(): void {
+    let series: ChartOption<SeriesOption>;
+    const option = {
+      type: this.seriesType as SeriesType,
+      name: this.seriesName,
+      color: this.seriesColor,
+      data: JSON.parse(this.seriesData),
+    };
+    switch (this.seriesType) {
+      case 'bar':
+        series = SeriesFactory.createSeries(SeriesType.BAR, option);
+        break;
+      case 'line':
+        series = SeriesFactory.createSeries(SeriesType.LINE, option);
+        break;
+    }
+    this.series.push(series.getOption());
+    this.onCreate();
+  }
+
+  onEditSeries(series: SeriesOption, index: number): void {
+    this.series = this.series.map((s, i) => {
+      if (i === index) {
+        return series;
+      }
+      return s;
+    });
+    this.onCreate();
+  }
+
   onCreate(): void {
-    const option = this.createOption();
-    console.log('@@SeriesOption@@=>', option);
-    this.build.emit(this.createOption());
+    this.build.emit(this.series);
+    console.log('(Series) ->', this.series);
   }
 
 }
